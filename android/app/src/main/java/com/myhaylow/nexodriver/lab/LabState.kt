@@ -12,6 +12,8 @@ data class LabSnapshot(
     val pickupMinutes: Int,
     val tripMinutes: Int,
     val result: DecisionResult,
+    val estimatedCostPerKm: Double? = null,
+    val estimatedOperatingCost: Double? = null,
     val estimatedNetProfit: Double? = null,
 ) {
     val profitPerMinute: Double? = estimatedNetProfit?.div(result.metrics.totalMinutes)
@@ -26,7 +28,8 @@ object LabState {
         private set
 
     @Synchronized
-    fun publish(offer: UberOffer, result: DecisionResult, estimatedOperatingCost: Double? = null) {
+    fun publish(offer: UberOffer, result: DecisionResult, estimatedOperatingCost: Double? = null,
+        estimatedCostPerKm: Double? = null) {
         val snapshot = LabSnapshot(
             grossFare = offer.grossFare,
             readingConfidence = offer.confidence,
@@ -35,6 +38,8 @@ object LabState {
             pickupMinutes = offer.pickup.minutes,
             tripMinutes = offer.trip.minutes,
             result = result,
+            estimatedCostPerKm = estimatedCostPerKm,
+            estimatedOperatingCost = estimatedOperatingCost,
             estimatedNetProfit = estimatedOperatingCost?.let { offer.grossFare - it },
         )
         diagnostics.addLast(snapshot)

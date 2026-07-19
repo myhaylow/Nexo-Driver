@@ -6,6 +6,8 @@ import com.myhaylow.nexodriver.lab.LabSnapshot
 import com.myhaylow.nexodriver.lab.LabState
 import com.myhaylow.nexodriver.lab.ShadowOverlayController
 import com.myhaylow.nexodriver.lab.UberDecisionBridge
+import com.myhaylow.nexodriver.profile.ProfileRepository
+import com.myhaylow.nexodriver.profile.RuntimeConfiguration
 
 class UberOfferAccessibilityService : AccessibilityService() {
     /** Injection point for the future decision bridge. Matched cards are deliberately never emitted. */
@@ -18,6 +20,7 @@ class UberOfferAccessibilityService : AccessibilityService() {
     }
 
     override fun onServiceConnected() {
+        RuntimeConfiguration.initialize(ProfileRepository(this))
         overlay = ShadowOverlayController(this)
         LabState.addListener(labListener)
     }
