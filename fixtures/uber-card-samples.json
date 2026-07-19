@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "privacy": "anonymized",
+  "readerExpectations": {
+    "targetApplication": "UBER_DRIVER",
+    "mustIgnoreForeignWindows": true,
+    "decimalCurrencySeparator": ",",
+    "decimalDistanceSeparator": "."
+  },
+  "samples": [
+    {
+      "id": "radar-uberx-standard",
+      "lifecycle": "OFFER",
+      "presentation": "RADAR",
+      "cta": "SELECT",
+      "category": "UberX",
+      "grossFare": 10.54,
+      "displayedPerKm": 1.51,
+      "pickup": { "minutes": 6, "distanceKm": 1.8 },
+      "trip": { "minutes": 11, "distanceKm": 5.2 },
+      "rating": { "score": 4.87, "count": 94, "verified": false },
+      "badges": []
+    },
+    {
+      "id": "radar-priority-with-bonus",
+      "lifecycle": "OFFER",
+      "presentation": "RADAR",
+      "cta": "SELECT",
+      "category": "Priority",
+      "grossFare": 23.11,
+      "displayedPerKm": 1.76,
+      "pickup": { "minutes": 14, "distanceKm": 6.6 },
+      "trip": { "minutes": 11, "distanceKm": 6.5 },
+      "rating": { "score": 5.00, "count": 2, "verified": false },
+      "priorityBonus": 1.89,
+      "badges": ["PRIORITY_PICKUP"]
+    },
+    {
+      "id": "radar-short-trip-long-pickup",
+      "lifecycle": "OFFER",
+      "presentation": "RADAR",
+      "cta": "SELECT",
+      "category": "UberX",
+      "grossFare": 9.40,
+      "displayedPerKm": 1.13,
+      "pickup": { "minutes": 12, "distanceKm": 7.4 },
+      "trip": { "minutes": 3, "distanceKm": 0.9 },
+      "rating": { "score": 4.93, "count": 389, "verified": true },
+      "badges": ["VERIFIED_RIDER"]
+    },
+    {
+      "id": "exclusive-comfort",
+      "lifecycle": "OFFER",
+      "presentation": "DIRECT_EXCLUSIVE",
+      "cta": "ACCEPT",
+      "category": "Comfort",
+      "grossFare": 16.15,
+      "pickup": { "minutes": 2, "distanceKm": 0.8 },
+      "trip": { "minutes": 11, "distanceKm": 4.8 },
+      "rating": { "score": 4.95, "count": 853, "verified": false },
+      "badges": ["EXCLUSIVE"]
+    },
+    {
+      "id": "exclusive-delivery-car",
+      "lifecycle": "OFFER",
+      "presentation": "DIRECT_EXCLUSIVE",
+      "cta": "ACCEPT",
+      "category": "Envios Carro",
+      "grossFare": 7.67,
+      "pickup": { "minutes": 4, "distanceKm": 1.7 },
+      "trip": { "minutes": 7, "distanceKm": 2.3 },
+      "rating": { "score": 4.95, "count": 775, "verified": true },
+      "badges": ["EXCLUSIVE", "VERIFIED_RIDER"]
+    },
+    {
+      "id": "radar-long-trip",
+      "lifecycle": "OFFER",
+      "presentation": "RADAR",
+      "cta": "SELECT",
+      "category": "UberX",
+      "grossFare": 34.20,
+      "displayedPerKm": 1.08,
+      "pickup": { "minutes": 10, "distanceKm": 4.0 },
+      "trip": { "minutes": 28, "distanceKm": 27.6 },
+      "rating": { "score": 4.91, "count": 176, "verified": true },
+      "badges": ["VERIFIED_RIDER"]
+    },
+    {
+      "id": "radar-transition-matched",
+      "transitionGroup": "offer-lifecycle-example",
+      "lifecycle": "MATCHED",
+      "presentation": "MATCHED_RESULT",
+      "cta": "START_NAVIGATION",
+      "category": "UberX",
+      "grossFare": 10.99,
+      "displayedPerKm": 1.37,
+      "pickup": { "minutes": 4, "distanceKm": 1.4 },
+      "trip": { "minutes": 14, "distanceKm": 6.6 },
+      "rating": { "score": 5.00, "count": 4, "verified": false },
+      "badges": []
+    },
+    {
+      "id": "radar-transition-offer",
+      "transitionGroup": "offer-lifecycle-example",
+      "lifecycle": "OFFER",
+      "presentation": "RADAR",
+      "cta": "SELECT",
+      "category": "UberX",
+      "grossFare": 10.99,
+      "displayedPerKm": 1.37,
+      "pickup": { "minutes": 4, "distanceKm": 1.4 },
+      "trip": { "minutes": 14, "distanceKm": 6.6 },
+      "rating": { "score": 5.00, "count": 4, "verified": false },
+      "badges": []
+    },
+    {
+      "id": "exclusive-comfort-toward-destination",
+      "lifecycle": "OFFER",
+      "presentation": "DIRECT_EXCLUSIVE",
+      "cta": "ACCEPT",
+      "category": "Comfort",
+      "grossFare": 20.59,
+      "pickup": { "minutes": 4, "distanceKm": 1.4 },
+      "trip": { "minutes": 18, "distanceKm": 11.7 },
+      "rating": { "score": 4.71, "count": 252, "verified": false },
+      "badges": ["EXCLUSIVE", "TOWARD_DESTINATION"]
+    },
+    {
+      "id": "exclusive-uberx-foreign-overlay",
+      "lifecycle": "OFFER",
+      "presentation": "DIRECT_EXCLUSIVE",
+      "cta": "ACCEPT",
+      "category": "UberX",
+      "grossFare": 21.39,
+      "pickup": { "minutes": 3, "distanceKm": 1.6 },
+      "trip": { "minutes": 25, "distanceKm": 17.8 },
+      "rating": { "score": 4.84, "count": 2023, "verified": false },
+      "badges": ["EXCLUSIVE"],
+      "foreignOverlayPresent": true
+    }
+  ]
+}
