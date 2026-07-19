@@ -36,6 +36,9 @@ O perfil inicial usa R$ 1,80/km, R$ 40/h, 3,5 km e 8 minutos para coleta. Perfis
 - NotificationListenerService apenas como apoio.
 - OCR fora do nucleo inicial.
 - Leitura somente no MVP; executor permanece desacoplado.
+- Variantes iniciais confirmadas: radar (`Selecionar`), exclusiva direta (`Aceitar`) e viagem encontrada (`Iniciar navegacao`).
+- Campos opcionais nao alteram o posicionamento logico dos campos obrigatorios.
+- Janelas e overlays de outros aplicativos devem ser ignorados pelo `packageName`.
 
 ## Geografia
 
