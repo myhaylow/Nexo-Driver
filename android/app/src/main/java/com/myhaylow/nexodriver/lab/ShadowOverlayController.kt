@@ -37,6 +37,7 @@ class ShadowOverlayController(context: Context) {
             }
             addLine(if (destination) "MODO DESTINO • ${snapshot.result.decision.pt()}" else snapshot.result.decision.pt(), color, 17f)
             addLine("R$/km ${money(snapshot.result.metrics.perKm)}  •  R$/hora ${money(snapshot.result.metrics.perHour)}")
+            addLine("Custo/km ${optionalMoney(snapshot.estimatedCostPerKm)}  •  Custo oferta ${optionalMoney(snapshot.estimatedOperatingCost)}")
             addLine("Lucro líquido ${optionalMoney(snapshot.estimatedNetProfit)}  •  Lucro/min ${optionalMoney(snapshot.profitPerMinute)}")
             addLine("${number(snapshot.result.metrics.totalDistanceKm)} km  •  ${number(snapshot.result.metrics.totalMinutes)} min")
         }
