@@ -1,0 +1,16 @@
+[agents]
+max_threads = 3
+max_depth = 1
+interrupt_message = true
+
+[agents.android-engineer]
+description = "Implementa uma tarefa Android isolada, com foco em acessibilidade, overlay e desempenho."
+config_file = "./agents/android-engineer.toml"
+
+[agents.decision-reviewer]
+description = "Revisa o motor de decisão, fórmulas, cenários-limite e testes sem modificar arquivos."
+config_file = "./agents/decision-reviewer.toml"
+
+[agents.log-analyst]
+description = "Analisa logs anonimizados de leitura e propõe fixtures reproduzíveis sem modificar arquivos."
+config_file = "./agents/log-analyst.toml"
