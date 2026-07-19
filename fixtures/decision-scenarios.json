@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "readingConfidenceMinimum": 0.95,
+    "pickupTolerance": 0.10,
+    "strongKmBonus": 0.10,
+    "hourTolerance": 0.10
+  },
+  "profiles": {
+    "default": {
+      "id": "default",
+      "name": "Perfil padrao",
+      "minPerKm": 1.80,
+      "targetPerHour": 40.00,
+      "maxPickupDistanceKm": 3.50,
+      "maxPickupMinutes": 8.00
+    },
+    "destination": {
+      "id": "destination",
+      "name": "Modo Destino",
+      "minPerKm": 1.60,
+      "targetPerHour": 36.00,
+      "maxPickupDistanceKm": 3.50,
+      "maxPickupMinutes": 8.00
+    }
+  },
+  "scenarios": [
+    {
+      "id": "accept-default-targets",
+      "profileId": "default",
+      "offer": {
+        "grossFare": 24.00,
+        "pickupDistanceKm": 2.00,
+        "tripDistanceKm": 10.00,
+        "pickupMinutes": 5.00,
+        "tripMinutes": 25.00,
+        "readingConfidence": 0.99
+      },
+      "expected": { "decision": "ACCEPT", "reason": "KM_AND_HOUR_APPROVED" }
+    },
+    {
+      "id": "reject-km-below-minimum",
+      "profileId": "default",
+      "offer": {
+        "grossFare": 17.00,
+        "pickupDistanceKm": 2.00,
+        "tripDistanceKm": 8.00,
+        "pickupMinutes": 4.00,
+        "tripMinutes": 16.00,
+        "readingConfidence": 0.99
+      },
+      "expected": { "decision": "REJECT", "reason": "KM_BELOW_MINIMUM" }
+    },
+    {
+      "id": "analyze-low-confidence",
+      "profileId": "default",
+      "offer": {
+        "grossFare": 30.00,
+        "pickupDistanceKm": 2.00,
+        "tripDistanceKm": 10.00,
+        "pickupMinutes": 4.00,
+        "tripMinutes": 20.00,
+        "readingConfidence": 0.80
+      },
+      "expected": { "decision": "ANALYZE", "reason": "LOW_READING_CONFIDENCE" }
+    },
+    {
+      "id": "reject-supermarket",
+      "profileId": "default",
+      "offer": {
+        "grossFare": 40.00,
+        "pickupDistanceKm": 1.00,
+        "tripDistanceKm": 9.00,
+        "pickupMinutes": 3.00,
+        "tripMinutes": 17.00,
+        "readingConfidence": 0.99,
+        "supermarketBlocked": true
+      },
+      "expected": { "decision": "REJECT", "reason": "SUPERMARKET_BLOCKED" }
+    },
+    {
+      "id": "reject-geographic-block",
+      "profileId": "default",
+      "offer": {
+        "grossFare": 40.00,
+        "pickupDistanceKm": 1.00,
+        "tripDistanceKm": 9.00,
+        "pickupMinutes": 3.00,
+        "tripMinutes": 17.00,
+        "readingConfidence": 0.99,
+        "geographicBlocked": true
+      },
+      "expected": { "decision": "REJECT", "reason": "GEOGRAPHIC_BLOCKED" }
+    },
+    {
+      "id": "accept-pickup-tolerance",
+      "profileId": "default",
+      "offer": {
+        "grossFare": 30.00,
+        "pickupDistanceKm": 3.80,
+        "tripDistanceKm": 8.20,
+        "pickupMinutes": 8.50,
+        "tripMinutes": 21.50,
+        "readingConfidence": 0.99
+      },
+      "expected": { "decision": "ACCEPT", "reason": "PICKUP_TOLERANCE_APPLIED" }
+    },
+    {
+      "id": "reject-above-pickup-tolerance",
+      "profileId": "default",
+      "offer": {
+        "grossFare": 40.00,
+        "pickupDistanceKm": 4.00,
+        "tripDistanceKm": 8.00,
+        "pickupMinutes": 9.00,
+        "tripMinutes": 21.00,
+        "readingConfidence": 0.99
+      },
+      "expected": { "decision": "REJECT", "reason": "PICKUP_ABOVE_LIMIT" }
+    },
+    {
+      "id": "accept-km-compensates-hour",
+      "profileId": "default",
+      "offer": {
+        "grossFare": 21.00,
+        "pickupDistanceKm": 2.00,
+        "tripDistanceKm": 8.00,
+        "pickupMinutes": 7.00,
+        "tripMinutes": 27.00,
+        "readingConfidence": 0.99,
+        "trafficContext": "NORMAL"
+      },
+      "expected": { "decision": "ACCEPT", "reason": "KM_COMPENSATED_HOUR" }
+    },
+    {
+      "id": "analyze-no-compensation-in-traffic",
+      "profileId": "default",
+      "offer": {
+        "grossFare": 21.00,
+        "pickupDistanceKm": 2.00,
+        "tripDistanceKm": 8.00,
+        "pickupMinutes": 7.00,
+        "tripMinutes": 27.00,
+        "readingConfidence": 0.99,
+        "trafficContext": "INTENSE"
+      },
+      "expected": { "decision": "ANALYZE", "reason": "HOUR_BELOW_TARGET" }
+    },
+    {
+      "id": "accept-destination-profile",
+      "profileId": "destination",
+      "offer": {
+        "grossFare": 18.00,
+        "pickupDistanceKm": 2.00,
+        "tripDistanceKm": 8.00,
+        "pickupMinutes": 5.00,
+        "tripMinutes": 25.00,
+        "readingConfidence": 0.99,
+        "destination": {
+          "matches": true,
+          "insideRadius": true,
+          "radiusKm": 4.00
+        }
+      },
+      "expected": { "decision": "ACCEPT", "reason": "KM_AND_HOUR_APPROVED" }
+    }
+  ]
+}
