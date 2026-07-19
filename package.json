@@ -1,0 +1,16 @@
+{
+  "name": "nexo-driver-cloud-harness",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Motor de decisao e simulador em nuvem do Nexo Driver",
+  "scripts": {
+    "test": "node --test",
+    "test:watch": "node --test --watch",
+    "simulate": "node cloud/simulator.js",
+    "validate:fixtures": "node cloud/validate-fixtures.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
