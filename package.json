@@ -8,7 +8,8 @@
     "test": "node --test",
     "test:watch": "node --test --watch",
     "simulate": "node cloud/simulator.js",
-    "validate:fixtures": "node cloud/validate-fixtures.js"
+    "validate:fixtures": "node cloud/validate-fixtures.js",
+    "validate:uber-cards": "node cloud/validate-uber-card-fixtures.js"
   },
   "engines": {
     "node": ">=20"
