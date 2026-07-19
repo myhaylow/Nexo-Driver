@@ -6,6 +6,8 @@ import com.myhaylow.nexodriver.decision.DecisionProfiles
 import com.myhaylow.nexodriver.decision.TrafficContext
 import com.myhaylow.nexodriver.uber.OfferIndicator
 import com.myhaylow.nexodriver.uber.ParseResult
+import com.myhaylow.nexodriver.finance.FinanceCalculator
+import com.myhaylow.nexodriver.profile.RuntimeConfiguration
 
 object UberDecisionBridge {
     data class Context(
@@ -37,7 +39,11 @@ object UberDecisionBridge {
             trafficContext = context.trafficContext,
             destinationMatches = destination,
         )
-        val profile = if (destination) DecisionProfiles.DESTINATION else DecisionProfiles.DEFAULT
-        LabState.publish(value, DecisionEngine.evaluate(input, profile))
+        val configured = if (destination) RuntimeConfiguration.destination() else RuntimeConfiguration.current()
+        val profile = configured?.first?.profile?.decisionProfile()
+            ?: if (destination) DecisionProfiles.DESTINATION else DecisionProfiles.DEFAULT
+        val profit = configured?.let { FinanceCalculator.evaluate(it.second, value.grossFare,
+            input.pickupDistanceKm + input.tripDistanceKm, input.pickupMinutes + input.tripMinutes) }
+        LabState.publish(value, DecisionEngine.evaluate(input, profile), profit?.offerCost, profit?.costPerKm)
     }
 }
